@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untuk Sayangku</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #ffeef2;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 85%;
+            max-width: 400px;
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            display: none; /* Semua halaman disembunyikan dulu */
+        }
+
+        /* Tampilkan halaman aktif */
+        .active {
+            display: block;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .gif-img {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+        }
+
+        .foto-akhir {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid #ff4d6d;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 77, 109, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 77, 109, 0); }
+        }
+
+        h2 { color: #ff4d6d; font-size: 1.4rem; }
+        p { color: #555; line-height: 1.6; }
+
+        .btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 15px;
+            animation: shake 1s infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        audio { display: none; }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop>
+        <source src="lagu-romantis.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="page1" class="container active">
+        <img src="siker1.gif" class="gif-img" alt="Cute GIF">
+        <h2>Hai Cantik...</h2>
+        <p>Aku punya sesuatu buat kamu, diklik ya?</p>
+        <button class="btn" onclick="nextPage(1)">Mau Lihat! ❤️</button>
+    </div>
+
+    <div id="page2" class="container">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbm56d3Jxc3F5bm56bm56bm56bm56bm56bm56bm56bm56ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/L4lvBpHWkALuM/giphy.gif" class="gif-img" alt="Cute GIF">
+        <h2>Tau Gak?</h2>
+        <p>Setiap hari aku selalu bersyukur karena ada kamu di hidupku.</p>
+        <button class="btn" onclick="nextPage(2)">Terus? 👉</button>
+    </div>
+
+    <div id="page3" class="container">
+        <img src="foto-cewek.jpg" class="foto-akhir" alt="My Love">
+        <h2>I Love You So Much! 💖</h2>
+        <p>Tetap sama aku terus ya? Kamu adalah hal terindah yang pernah aku miliki.</p>
+        <p style="font-size: 0.8rem; color: #ff8fa3;">(Lagu sekarang diputar... 🎵)</p>
+    </div>
+
+    <script>
+        function nextPage(currentPage) {
+            // Sembunyikan halaman sekarang
+            document.getElementById('page' + currentPage).classList.remove('active');
+            
+            // Tampilkan halaman berikutnya
+            let next = currentPage + 1;
+            document.getElementById('page' + next).classList.add('active');
+
+            // Mulai putar musik saat klik pertama
+            if(currentPage === 1) {
+                let music = document.getElementById('bgMusic');
+                music.play().catch(error => {
+                    console.log("Autoplay dicegah browser, musik akan coba diputar lagi.");
+                });
+            }
+        }
+    </script>
+</body>
+</html>
